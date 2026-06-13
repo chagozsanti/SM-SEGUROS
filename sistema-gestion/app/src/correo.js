@@ -8,8 +8,10 @@ let transporter = null;
 let credencialesUsadas = '';
 
 function obtenerTransporte() {
-  const usuario = getConfig('smtp_usuario', '');
-  const clave = getConfig('smtp_clave_app', '');
+  const usuario = getConfig('smtp_usuario', '').trim();
+  // La contraseña de aplicación de Google se muestra en 4 grupos de 4 con espacios,
+  // pero el login espera los 16 caracteres seguidos: quitamos cualquier espacio.
+  const clave = getConfig('smtp_clave_app', '').replace(/\s/g, '');
   if (!usuario || !clave) throw new Error('Configura el correo corporativo y la contraseña de aplicación en Configuración');
   const firma = usuario + '|' + clave;
   if (!transporter || credencialesUsadas !== firma) {
