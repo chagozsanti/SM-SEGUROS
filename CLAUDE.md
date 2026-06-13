@@ -8,7 +8,7 @@ Proyecto de una agencia de seguros en Colombia (SM Seguros, Marinilla). Dos fren
 
 **El estado y la trazabilidad del proyecto viven en [`ESTADO-DEL-PROYECTO.md`](ESTADO-DEL-PROYECTO.md).**
 - **Al empezar:** léelo para saber en qué quedó el proyecto.
-- **Al terminar un trabajo:** añade una entrada con fecha (sección nueva arriba) describiendo qué se hizo. Es el diario del proyecto y debe quedar al día.
+- **Al terminar un trabajo:** añade una entrada con fecha (sección nueva arriba) describiendo qué se hizo. Es el diario del proyecto y debe quedar al día. Hay un comando `/handoff` que hace exactamente esto — sugiérelo al cerrar la sesión.
 
 ## Cómo correr la app
 
