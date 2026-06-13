@@ -5,7 +5,7 @@
       "name": "sm-gestion",
       "runtimeExecutable": "/Users/santiago/.local/node/bin/node",
       "runtimeArgs": ["server.js"],
-      "cwd": "/Users/santiago/Projects/sm-gestion",
+      "cwd": "/Users/santiago/Documents/cotizador-autos/sistema-gestion/app",
       "port": 3477
     }
   ]
