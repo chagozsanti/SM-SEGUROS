@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SM Gestión — SM Seguros</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<aside id="menu">
+  <h1><img src="logo.png" alt="S&M Seguros"></h1>
+  <nav>
+    <a href="#panel" class="activo" data-vista="panel"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="6" width="4" height="15" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg><span>Panel</span></a>
+    <a href="#clientes" data-vista="clientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Clientes</span></a>
+    <a href="#polizas" data-vista="polizas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span>Pólizas</span></a>
+    <a href="#runt" data-vista="runt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><span>SOAT/RTM</span></a>
+    <a href="#negocios" data-vista="negocios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg><span>Embudo</span></a>
+    <a href="#oportunidades" data-vista="oportunidades"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.5.4.8 1 .9 1.6l.1.7h6l.1-.7c.1-.6.4-1.2.9-1.6A7 7 0 0 0 12 2z"/></svg><span>Oportunidades</span></a>
+    <a href="#asistente" data-vista="asistente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Asistente IA</span></a>
+    <a href="#notificaciones" data-vista="notificaciones"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span>Notificaciones</span></a>
+    <a href="#plantillas" data-vista="plantillas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg><span>Plantillas</span></a>
+    <a href="#importar" data-vista="importar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>Importar</span></a>
+    <a href="#config" data-vista="config"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Configuración</span></a>
+  </nav>
+  <div id="estado-canales">
+    <div id="chip-wa" class="chip">WhatsApp: …</div>
+    <div id="chip-mail" class="chip">Correo: …</div>
+  </div>
+</aside>
+
+<main>
+  <!-- PANEL / DASHBOARD -->
+  <section id="vista-panel" class="vista">
+    <div class="encabezado-vista">
+      <h2>Panel</h2>
+      <span id="panel-fecha" class="nota" style="margin:0"></span>
+    </div>
+    <div class="tarjetas" id="panel-tarjetas"></div>
+    <div class="dos-columnas">
+      <div class="caja"><h3>Pólizas vigentes por aseguradora</h3><div id="grafico-aseguradora" class="grafico-barras"></div></div>
+      <div class="caja"><h3>Pólizas vigentes por ramo</h3><div id="grafico-ramo" class="grafico-barras"></div></div>
+    </div>
+    <div class="dos-columnas">
+      <div class="caja"><h3>Pólizas nuevas por mes</h3><div id="grafico-mes" class="grafico-columnas"></div></div>
+      <div class="caja"><h3>Embudo de ventas</h3><div id="grafico-embudo" class="grafico-barras"></div></div>
+    </div>
+    <div class="dos-columnas">
+      <div class="caja">
+        <h3>Próximas renovaciones (30 días)</h3>
+        <table id="tabla-renovaciones"><thead><tr>
+          <th>Vence</th><th>Cliente</th><th>Ramo</th><th>Aseguradora</th><th>Riesgo</th><th>Prima</th>
+        </tr></thead><tbody></tbody></table>
+      </div>
+      <div class="caja">
+        <h3>🎂 Cumpleaños próximos</h3>
+        <ul id="lista-cumple"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTES -->
+  <section id="vista-clientes" class="vista oculta">
+    <div class="encabezado-vista">
+      <h2>Clientes</h2>
+      <div>
+        <input type="search" id="buscar-cliente" placeholder="Buscar nombre, documento, placa…">
+        <button class="primario" onclick="abrirCliente()">+ Crear cliente</button>
+      </div>
+    </div>
+    <table id="tabla-clientes"><thead><tr>
+      <th>Nombre</th><th>Documento</th><th>Celular</th><th>Email</th><th>Estado</th><th>Notif.</th><th></th>
+    </tr></thead><tbody></tbody></table>
+  </section>
+
+  <!-- PÓLIZAS -->
+  <section id="vista-polizas" class="vista oculta">
+    <div class="encabezado-vista">
+      <h2>Pólizas</h2>
+      <div>
+        <select id="filtro-estado-poliza">
+          <option value="">Todas</option>
+          <option value="vigente">Vigentes</option>
+          <option value="vencida">Vencidas</option>
+          <option value="renovada">Renovadas</option>
+          <option value="cancelada">Canceladas</option>
+        </select>
+        <input type="search" id="buscar-poliza" placeholder="Buscar número, placa, cliente…">
+        <button id="btn-leer-pdf" onclick="document.getElementById('archivo-poliza-pdf').click()">✨ Leer póliza de PDF</button>
+        <input type="file" id="archivo-poliza-pdf" accept="application/pdf" style="display:none" onchange="leerPolizaPDF(this)">
+        <button class="primario" onclick="abrirPoliza()">+ Crear póliza</button>
+      </div>
+    </div>
+    <table id="tabla-polizas"><thead><tr>
+      <th>Número</th><th>Cliente</th><th>Aseguradora</th><th>Ramo</th><th>Riesgo</th>
+      <th>Vence</th><th>Prima total</th><th>Comisión</th><th>Estado</th><th></th>
+    </tr></thead><tbody></tbody></table>
+  </section>
+
+  <!-- RUNT (SOAT / TECNOMECÁNICA) -->
+  <section id="vista-runt" class="vista oculta">
+    <div class="encabezado-vista">
+      <h2>SOAT y Tecnomecánica (RUNT)</h2>
+      <div>
+        <select id="filtro-runt">
+          <option value="">Todos</option>
+          <option value="sin">Sin fecha</option>
+          <option value="vencido">Vencidos</option>
+          <option value="pronto">Vencen pronto (30 días)</option>
+        </select>
+        <input type="search" id="buscar-runt" placeholder="Buscar cliente o placa…">
+      </div>
+    </div>
+    <p class="nota">Consulta gratis cada vehículo en el RUNT (tú resuelves el captcha) y guarda las fechas aquí. Puedes pegar el resultado del RUNT y el sistema extrae las fechas solo. Los recordatorios de SOAT y tecnomecánica usan estas fechas.</p>
+    <table id="tabla-runt"><thead><tr>
+      <th>Cliente</th><th>Placa</th><th>Documento</th><th>SOAT vence</th><th>Tecnomecánica</th><th></th>
+    </tr></thead><tbody></tbody></table>
+  </section>
+
+  <!-- EMBUDO DE VENTAS -->
+  <section id="vista-negocios" class="vista oculta">
+    <div class="encabezado-vista">
+      <h2>Embudo de ventas</h2>
+      <div>
+        <span id="embudo-resumen" class="nota" style="margin:0"></span>
+        <button class="primario" onclick="abrirNegocio()">+ Nuevo negocio</button>
+      </div>
+    </div>
+    <p class="nota">Gestiona tus prospectos antes de que sean clientes. Arrastra cada tarjeta entre etapas; al pasarla a <b>Ganado</b> te ofrece crear el cliente y la póliza automáticamente.</p>
+    <div id="embudo-board" class="embudo"></div>
+  </section>
+
+  <!-- OPORTUNIDADES -->
+  <section id="vista-oportunidades" class="vista oculta">
+    <div class="encabezado-vista">
+      <h2>Oportunidades</h2>
+      <div>
+        <span id="oport-fecha" class="nota" style="margin:0"></span>
+        <select id="filtro-oport"><option value="">Todas</option></select>
+        <button class="primario" id="btn-analizar" onclick="analizarCartera()">✨ Analizar cartera con IA</button>
+      </div>
+    </div>
+    <p class="nota">La IA revisa tus clientes y pólizas para detectar ventas cruzadas, renovaciones próximas y clientes a reactivar. Cada análisis tiene un pequeño costo de IA, así que el resultado se guarda hasta que vuelvas a analizar.</p>
+    <div id="oport-resumen" class="caja oculta"></div>
+    <div id="oport-lista"></div>
+  </section>
+
+  <!-- ASISTENTE IA -->
+  <section id="vista-asistente" class="vista oculta">
+    <h2>Asistente IA</h2>
+    <p class="nota">Pregúntale lo que quieras sobre tu cartera en lenguaje natural. La IA consulta tus datos (solo lectura) y te responde.</p>
+    <div id="chat-ejemplos">
+      <button class="chip-ejemplo" onclick="preguntarEjemplo(this)">¿Cuántas pólizas vencen este mes?</button>
+      <button class="chip-ejemplo" onclick="preguntarEjemplo(this)">¿Qué clientes no tienen correo registrado?</button>
+      <button class="chip-ejemplo" onclick="preguntarEjemplo(this)">¿Cuánto suman las comisiones de las pólizas vigentes?</button>
+      <button class="chip-ejemplo" onclick="preguntarEjemplo(this)">¿Cuántos clientes tengo por aseguradora?</button>
+    </div>
+    <div id="chat-conversacion"></div>
+    <form id="chat-form" onsubmit="enviarPregunta(event)">
+      <input id="chat-input" placeholder="Escribe tu pregunta…" autocomplete="off">
+      <button class="primario" type="submit" id="chat-enviar">Preguntar</button>
+    </form>
+  </section>
+
+  <!-- NOTIFICACIONES -->
+  <section id="vista-notificaciones" class="vista oculta">
+    <div class="encabezado-vista">
+      <h2>Notificaciones</h2>
+      <div>
+        <select id="filtro-notif">
+          <option value="pendiente">Pendientes</option>
+          <option value="enviada">Enviadas</option>
+          <option value="error">Con error</option>
+          <option value="descartada">Descartadas</option>
+        </select>
+        <button onclick="generarNotif()">🔄 Generar alertas de hoy</button>
+        <button class="primario" id="btn-enviar-todas" onclick="enviarNotif()">📤 Enviar pendientes</button>
+      </div>
+    </div>
+    <p class="nota">El sistema genera las alertas cada día a la hora configurada. Aquí puedes revisarlas antes de enviarlas, descartarlas o enviarlas todas.</p>
+    <table id="tabla-notif"><thead><tr>
+      <th>Tipo</th><th>Canal</th><th>Cliente</th><th>Destino</th><th>Mensaje</th><th>Estado</th><th></th>
+    </tr></thead><tbody></tbody></table>
+  </section>
+
+  <!-- PLANTILLAS -->
+  <section id="vista-plantillas" class="vista oculta">
+    <h2>Plantillas de mensajes</h2>
+    <p class="nota">Variables disponibles: {{nombre}}, {{numero_poliza}}, {{aseguradora}}, {{ramo}}, {{riesgo}}, {{fecha_fin}}, {{dias}}, {{valor}}, {{agencia}}, {{celular_agencia}}</p>
+    <div id="lista-plantillas"></div>
+  </section>
+
+  <!-- IMPORTAR -->
+  <section id="vista-importar" class="vista oculta">
+    <h2>Importar desde SOFTseguros</h2>
+    <p class="nota">Importa en este orden: <b>1) Clientes</b>, luego <b>2) Vehículos</b> y por último <b>3) Pólizas</b> (los vehículos y pólizas se vinculan a los clientes por número de documento).</p>
+    <div class="dos-columnas">
+      <div class="caja">
+        <h3>1. Clientes</h3>
+        <p class="nota">Excel del listado de clientes. El celular se toma de "Teléfono móvil".</p>
+        <input type="file" id="archivo-clientes" accept=".xlsx,.csv">
+        <button class="primario" onclick="importar('clientes')">Importar clientes</button>
+        <pre id="resultado-imp-clientes"></pre>
+      </div>
+      <div class="caja">
+        <h3>2. Vehículos (placa, SOAT, tecnomecánica)</h3>
+        <p class="nota">Excel con documento, placa y fechas de SOAT/tecnomecánica/impuestos. Enriquece los clientes ya importados.</p>
+        <input type="file" id="archivo-vehiculos" accept=".xlsx,.csv">
+        <button class="primario" onclick="importar('vehiculos')">Importar vehículos</button>
+        <pre id="resultado-imp-vehiculos"></pre>
+      </div>
+      <div class="caja">
+        <h3>3. Pólizas</h3>
+        <p class="nota">Excel del listado de pólizas. La prima total y la comisión se calculan si vienen vacías.</p>
+        <input type="file" id="archivo-polizas" accept=".xlsx,.csv">
+        <button class="primario" onclick="importar('polizas')">Importar pólizas</button>
+        <pre id="resultado-imp-polizas"></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONFIGURACIÓN -->
+  <section id="vista-config" class="vista oculta">
+    <h2>Configuración</h2>
+    <div class="dos-columnas">
+      <div class="caja">
+        <h3>📱 WhatsApp</h3>
+        <div id="wa-panel">
+          <p id="wa-estado-txt">Cargando…</p>
+          <img id="wa-qr" class="oculta" alt="Código QR">
+          <div class="fila-botones">
+            <button class="primario" onclick="waConectar()">Conectar / Mostrar QR</button>
+            <button onclick="waCerrar()" class="peligro">Cerrar sesión</button>
+          </div>
+          <hr>
+          <label>Probar envío a (celular):</label>
+          <div class="fila-botones">
+            <input id="wa-prueba-numero" placeholder="3001234567">
+            <button onclick="waPrueba()">Enviar prueba</button>
+          </div>
+        </div>
+      </div>
+      <div class="caja">
+        <h3>✉️ Correo corporativo (Gmail / Google Workspace)</h3>
+        <label>Correo</label>
+        <input id="cfg-smtp_usuario" placeholder="info@smseguros.com.co">
+        <label>Contraseña de aplicación <a href="https://myaccount.google.com/apppasswords" target="_blank">(crear aquí)</a></label>
+        <input id="cfg-smtp_clave_app" type="password" placeholder="xxxx xxxx xxxx xxxx">
+        <label>Remitente</label>
+        <input id="cfg-smtp_remitente" placeholder="SM Seguros <info@smseguros.com.co>">
+        <div class="fila-botones">
+          <button onclick="probarCorreo()">Probar conexión</button>
+          <input id="mail-prueba-dest" placeholder="correo de prueba">
+          <button onclick="enviarCorreoPrueba()">Enviar prueba</button>
+        </div>
+      </div>
+      <div class="caja">
+        <h3>⏰ Reglas de recordatorios</h3>
+        <label>Días de aviso antes del vencimiento de póliza (separados por coma)</label>
+        <input id="cfg-dias_aviso_renovacion">
+        <label>Días de aviso de cuotas de pago</label>
+        <input id="cfg-dias_aviso_cuota">
+        <label>Días de aviso SOAT</label>
+        <input id="cfg-dias_aviso_soat">
+        <label>Días de aviso tecnomecánica</label>
+        <input id="cfg-dias_aviso_tecno">
+        <label>Hora de generación/envío diario</label>
+        <input id="cfg-hora_envio" type="time">
+        <label class="check"><input type="checkbox" id="cfg-envio_automatico"> Enviar automáticamente sin revisión (si no, quedan pendientes para aprobar)</label>
+      </div>
+      <div class="caja">
+        <h3>🏢 Agencia</h3>
+        <label>Nombre</label>
+        <input id="cfg-nombre_agencia">
+        <label>Celular de contacto</label>
+        <input id="cfg-celular_agencia">
+      </div>
+      <div class="caja">
+        <h3>✨ Inteligencia Artificial (Claude)</h3>
+        <p class="nota">Permite redactar mensajes personalizados para los clientes con IA. Opcional: el sistema funciona sin esto.</p>
+        <label>API key de Anthropic <a href="https://console.anthropic.com/settings/keys" target="_blank">(obtener aquí)</a></label>
+        <input id="cfg-anthropic_api_key" type="password" placeholder="sk-ant-...">
+        <label>Modelo para redactar mensajes</label>
+        <select id="cfg-ia_modelo">
+          <option value="claude-haiku-4-5">Haiku — rápido y económico (recomendado para mensajes)</option>
+          <option value="claude-opus-4-8">Opus — el más capaz (mensajes más elaborados, más costoso)</option>
+        </select>
+        <label>Modelo para analizar la cartera (Oportunidades)</label>
+        <select id="cfg-ia_modelo_analisis">
+          <option value="claude-opus-4-8">Opus — el más capaz (recomendado para análisis)</option>
+          <option value="claude-haiku-4-5">Haiku — más económico (análisis más básico)</option>
+        </select>
+        <label>Tono de la agencia para los mensajes</label>
+        <input id="cfg-ia_tono" placeholder="cercano, cálido y profesional">
+        <div class="fila-botones">
+          <button onclick="probarIA()">Probar conexión IA</button>
+        </div>
+      </div>
+    </div>
+    <button class="primario grande" onclick="guardarConfig()">💾 Guardar configuración</button>
+  </section>
+</main>
+
+<!-- Modal genérico -->
+<div id="modal" class="oculta">
+  <div id="modal-contenido"></div>
+</div>
+
+<div id="toast" class="oculta"></div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "sm-gestion",
+      "runtimeExecutable": "/Users/santiago/.local/node/bin/node",
+      "runtimeArgs": ["server.js"],
+      "cwd": "/Users/santiago/Projects/sm-gestion",
+      "port": 3477
+    }
+  ]
+}
