@@ -16,7 +16,7 @@ URL directa (con sesión activa): https://sucursalenlinea.axacolpatria.co/group/
 
 > Nota: en Herramientas también hay "Cotizadores" pero solo trae Vida y PYME; el de autos está bajo Gestor de Ventas.
 
-## Formulario inicial ("Cotizador de Autos")
+## Formulario inicial ("Cotizador de Autos") 
 
 **Sección 1 — Datos personales (del tomador/conductor):**
 - Documento * (tipo: selector + número)
@@ -30,6 +30,11 @@ URL directa (con sesión activa): https://sucursalenlinea.axacolpatria.co/group/
 - **Servicio**: Particular o Público (lo que diferencia los pesados) — normalmente Particular
 - **Departamento de circulación**: por defecto SIEMPRE **Antioquia**, salvo que Santi indique otro
 - Botón **CONTINUAR** → pasos siguientes por documentar
+
+**Sección 3 — Información del vehículo:**
+
+
+necesito añadir una seccion 3 
 
 **Reglas de Santi para este portal:**
 - Datos obligatorios del tomador: documento, fecha de nacimiento, género.

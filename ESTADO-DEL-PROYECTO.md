@@ -2,7 +2,15 @@
 
 > Archivo de traspaso para continuar en otro computador. Al retomar, pídele a Claude que lea este archivo.
 
-**Última actualización:** 2026-06-13 (noche: runtime en el repo git + diálogo de WhatsApp + trazabilidad de sesiones)
+**Última actualización:** 2026-06-13 (noche, cont.: correo corporativo conectado y verificado)
+
+## Sesión 2026-06-13 (noche, continuación): correo corporativo conectado
+- ✅ **Correo corporativo SMTP operativo** (WhatsApp ya quedó listo en la sesión previa; ahora ambos canales funcionan). El sistema envía por Gmail/Google Workspace.
+- ✅ **Diagnóstico y causa del fallo `535-5.7.8 BadCredentials`:** la contraseña de aplicación se había generado bajo `santiago@smseguros.com.co`, pero el usuario en Configuración estaba como `info@smseguros.com.co` (desajuste de cuenta). Corregido: `smtp_usuario` = `santiago@smseguros.com.co`.
+- ✅ **Remitente con alias:** `info@smseguros.com.co` es alias del buzón de `santiago@`, así que el remitente quedó como `SM Seguros <info@smseguros.com.co>` (auth con santiago@, envío mostrando info@). Verificado con envío real. *Pendiente de Santi:* confirmar que el campo De: del correo recibido muestre `info@` (si no, agregar info@ en Gmail → Cuentas → "Enviar como").
+- ✅ **Fix de código (PR [#3](https://github.com/chagozsanti/SM-SEGUROS/pull/3), fusionado a `main`):** `sistema-gestion/app/src/correo.js` ahora limpia los espacios de la contraseña de aplicación (Google la muestra en 4 grupos de 4; el login SMTP espera los 16 caracteres seguidos) y recorta espacios del usuario. Así "Probar conexión" funciona aunque se pegue con el formato de Google.
+- ✅ **Verificado end-to-end:** `probarConexion()`/verify SMTP, envío de prueba real recibido, y endpoint `POST /api/correo/probar` del servidor en marcha → `{"ok":true}`. Servidor reiniciado para cargar el fix.
+- ⚠️ **Nota operativa:** Google puede devolver un `535 BadCredentials` **transitorio** tras varios logins SMTP muy seguidos (throttle); reintentar resuelve. En uso normal los envíos van espaciados y no se repite.
 
 ## Sesión 2026-06-13 (noche): repo git como único runtime + diálogo de WhatsApp + trazabilidad
 - ✅ **El proyecto ahora vive y corre desde el repositorio git**: `/Users/santiago/Documents/cotizador-autos` (remoto GitHub: `chagozsanti/SM-SEGUROS`). El código del sistema está en `sistema-gestion/app/`. Para arrancar: doble clic en `sistema-gestion/app/iniciar.command` (o `cd` ahí y `node server.js`) → http://localhost:3477.
