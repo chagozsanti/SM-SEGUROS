@@ -890,6 +890,75 @@ window.waPrueba = async function () {
   } catch (e) { toast(e.message, true); }
 };
 
+// ---------- Diálogo de WhatsApp (desde el chip del menú) ----------
+let timerWAModal = null;
+window.abrirWhatsAppDialog = function () {
+  $('#modal-contenido').innerHTML = `
+    <h3>📱 Conexión de WhatsApp</h3>
+    <p class="nota">Vincula el WhatsApp del celular de la agencia para enviar recordatorios y mensajes. Es una conexión por dispositivo (igual que WhatsApp Web): no requiere una API de pago.</p>
+    <div id="wad-estado" class="wa-estado">Cargando…</div>
+    <div id="wad-qr-cont" class="wa-qr-cont oculta">
+      <p class="nota" style="margin:0 0 10px">En el celular: WhatsApp → <b>Dispositivos vinculados</b> → <b>Vincular un dispositivo</b>, y escanea este código.</p>
+      <img id="wad-qr" alt="Código QR de WhatsApp">
+    </div>
+    <div class="fila-botones">
+      <button class="primario" id="wad-conectar" onclick="wadConectar()">Conectar / Mostrar QR</button>
+      <button class="peligro" onclick="wadCerrar()">Cerrar sesión</button>
+    </div>
+    <hr>
+    <label>Enviar mensaje de prueba a (celular):</label>
+    <div class="fila-botones">
+      <input id="wad-prueba-numero" placeholder="3001234567" inputmode="numeric">
+      <button onclick="wadPrueba()">Enviar prueba</button>
+    </div>
+    <div class="fila-botones" style="justify-content:flex-end;margin-top:14px">
+      <button onclick="cerrarWhatsAppDialog()">Cerrar</button>
+    </div>`;
+  $('#modal').classList.remove('oculta');
+  wadRefrescar();
+};
+async function wadRefrescar() {
+  if ($('#modal').classList.contains('oculta') || !$('#wad-estado')) { clearTimeout(timerWAModal); return; }
+  let e;
+  try { e = await api('/whatsapp/estado'); } catch { return; }
+  const txt = {
+    desconectado: '🔴 Desconectado' + (e.ultimoError ? ` — ${e.ultimoError}` : ''),
+    esperando_qr: '🟡 Esperando que escanees el código QR…',
+    conectando: '🟡 Conectando…',
+    conectado: `🟢 Conectado como +${e.numero}`
+  }[e.conexion] || '…';
+  const elEstado = $('#wad-estado');
+  if (!elEstado) { clearTimeout(timerWAModal); return; }
+  elEstado.textContent = txt;
+  elEstado.className = 'wa-estado ' + (e.conexion === 'conectado' ? 'ok' : e.conexion === 'desconectado' ? 'mal' : 'esperando');
+  const cont = $('#wad-qr-cont'), img = $('#wad-qr');
+  if (e.qrDataUrl && img) { img.src = e.qrDataUrl; cont.classList.remove('oculta'); }
+  else if (cont) cont.classList.add('oculta');
+  const btn = $('#wad-conectar');
+  if (btn) btn.disabled = ['esperando_qr', 'conectando'].includes(e.conexion);
+  actualizarChips();
+  if (['esperando_qr', 'conectando'].includes(e.conexion)) {
+    clearTimeout(timerWAModal);
+    timerWAModal = setTimeout(wadRefrescar, 2500);
+  }
+}
+window.wadConectar = async function () {
+  try { await api('/whatsapp/conectar', 'POST'); setTimeout(wadRefrescar, 1200); }
+  catch (e) { toast(e.message, true); }
+};
+window.wadCerrar = async function () {
+  if (!confirm('¿Cerrar la sesión de WhatsApp? Tendrás que volver a escanear el QR.')) return;
+  try { await api('/whatsapp/cerrar', 'POST'); wadRefrescar(); }
+  catch (e) { toast(e.message, true); }
+};
+window.wadPrueba = async function () {
+  try {
+    const r = await api('/whatsapp/prueba', 'POST', { celular: $('#wad-prueba-numero').value });
+    toast(`Prueba enviada a +${r.numero} ✅`);
+  } catch (e) { toast(e.message, true); }
+};
+window.cerrarWhatsAppDialog = function () { clearTimeout(timerWAModal); cerrarModal(); };
+
 // ---------- Correo ----------
 window.probarCorreo = async function () {
   await guardarConfig();
@@ -924,6 +993,9 @@ async function actualizarChips() {
 
 window.cerrarModal = () => $('#modal').classList.add('oculta');
 $('#modal').addEventListener('click', e => { if (e.target.id === 'modal') cerrarModal(); });
+$('#chip-wa').addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrirWhatsAppDialog(); }
+});
 
 // Inicio
 mostrarVista(location.hash.replace('#', '') || 'panel');

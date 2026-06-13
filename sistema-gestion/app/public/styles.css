@@ -71,6 +71,22 @@ body {
 }
 .chip.ok { border-color: #bfe7c9; background: var(--verde-tinte); color: var(--verde); }
 .chip.mal { border-color: #f6d2cf; background: var(--rojo-tinte); color: var(--rojo); }
+#chip-wa { cursor: pointer; user-select: none; transition: filter .15s, transform .1s; }
+#chip-wa:hover { filter: brightness(.97); }
+#chip-wa:active { transform: scale(.98); }
+#chip-wa:focus-visible { outline: 2px solid var(--azul-medio); outline-offset: 2px; }
+
+/* Diálogo de conexión de WhatsApp */
+.wa-estado {
+  font-size: 14px; padding: 11px 14px; border-radius: var(--radio-chico);
+  margin: 6px 0 16px; white-space: pre-line; border: 1px solid var(--borde);
+  background: var(--fondo); color: var(--texto);
+}
+.wa-estado.ok { border-color: #bfe7c9; background: var(--verde-tinte); color: var(--verde); }
+.wa-estado.mal { border-color: #f6d2cf; background: var(--rojo-tinte); color: var(--rojo); }
+.wa-estado.esperando { border-color: #f0dcae; background: var(--ambar-tinte); color: var(--ambar); }
+.wa-qr-cont { text-align: center; margin-bottom: 16px; }
+.wa-qr-cont img { width: 240px; height: 240px; border-radius: var(--radio-chico); border: 1px solid var(--borde); }
 
 main { flex: 1; padding: 32px 40px; max-width: 1320px; }
 h2 { margin-bottom: 18px; font-size: 26px; font-weight: 600; letter-spacing: -0.02em; }
