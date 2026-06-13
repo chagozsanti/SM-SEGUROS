@@ -2,7 +2,17 @@
 
 > Archivo de traspaso para continuar en otro computador. Al retomar, pídele a Claude que lea este archivo.
 
-**Última actualización:** 2026-06-13 (Embudo + Dashboard de KPIs + rediseño visual estilo Apple)
+**Última actualización:** 2026-06-13 (noche: runtime en el repo git + diálogo de WhatsApp + trazabilidad de sesiones)
+
+## Sesión 2026-06-13 (noche): repo git como único runtime + diálogo de WhatsApp + trazabilidad
+- ✅ **El proyecto ahora vive y corre desde el repositorio git**: `/Users/santiago/Documents/cotizador-autos` (remoto GitHub: `chagozsanti/SM-SEGUROS`). El código del sistema está en `sistema-gestion/app/`. Para arrancar: doble clic en `sistema-gestion/app/iniciar.command` (o `cd` ahí y `node server.js`) → http://localhost:3477.
+- ✅ **Migrado desde la antigua copia de desarrollo `~/Projects/sm-gestion`** (que queda solo como respaldo, ya NO se usa para correr): se copió la base de datos real (`datos/sm-gestion.db` + WAL, 119 clientes / 149 pólizas) y la sesión de WhatsApp (`datos/whatsapp-auth`, vinculada como +573009018745) a `sistema-gestion/app/datos/`, y se instaló `node_modules` con `npm ci`. `datos/` y `node_modules/` siguen en .gitignore (no se versionan).
+- ✅ **`gh` (GitHub CLI)** instalado en `~/.local/bin/gh` y autenticado como `chagozsanti` (sin Homebrew; `brew` no está instalado).
+- ✅ **Diálogo de conexión de WhatsApp** (PR #1, fusionado a main): el chip de WhatsApp del menú lateral abre un modal con estado en vivo, QR para vincular, conectar/cerrar sesión y envío de prueba. Reusa la conexión Baileys existente. Verificado en navegador (QR se genera y renderiza).
+- ✅ **Trazabilidad entre sesiones** (PR #2, abierto): se creó `CLAUDE.md` (se auto-carga en cada sesión y apunta a este diario como fuente de verdad: leer al iniciar, actualizar al terminar) y el comando de proyecto **`/handoff`** (`.claude/commands/handoff.md`) que resume la sesión y la añade a este archivo. Memoria local de Claude: `proyecto-sm-seguros.md` y `gh-cli-setup.md` (NO viajan en git; la trazabilidad que viaja es la del repo).
+- 💬 **Discusión de producto (sin código)**: cómo escalar SM Gestión a SaaS multi-asesor (login, multi-tenant con `agencia_id`/RLS en Postgres, secretos cifrados, WhatsApp Cloud API a escala, Habeas Data Ley 1581). Stack para multiplataforma: Cristian (dev del equipo) usa Flutter + Firebase; recomendación = mantener Flutter y Firebase Auth/FCM/Storage, pero usar **Postgres** (no Firestore) para el CRM relacional/reporting y un **servicio Node always-on (Cloud Run)** para WhatsApp/Baileys e IA (no caben en Cloud Functions).
+- **PENDIENTE**: fusionar el **PR #2** para activar `CLAUDE.md` y `/handoff` en `main`. Decisiones de producto pendientes de aterrizar: modelo de negocio (agencia con varios asesores vs. asesores independientes; gratis vs. de pago) antes de dimensionar el multi-tenant.
+- IMPORTANTE para futuras sesiones: editar y correr SIEMPRE desde el repo de Documents, NO desde `~/Projects/sm-gestion`.
 
 ## Sesión 2026-06-13 (tarde): Dashboard KPIs + diseño Apple + commit
 - ✅ **Commit del trabajo previo**: las 4 fases de IA, el embudo y el logo quedaron asegurados en git (`~/Projects/sm-gestion`, commit "v0.2"). El historial ya tiene v0.1 (base) y v0.2.
